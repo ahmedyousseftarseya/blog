@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,8 +41,19 @@ Route::prefix('v1')->middleware('auth_api')->group(function () {
         Route::post('/', 'store');
         Route::get('/{id}', 'show');
         Route::put('/{id}', 'update');
-        Route::delete('/{id}', 'destroy');
+        Route::delete('/{post}', 'destroy');
     });
+
+
+     // Auth
+     Route::controller(CommentController::class)->prefix('posts')->group(function () {
+        Route::get('/{postId}/comments', 'index');
+        Route::post('/{postId}/comments', 'store');
+        Route::get('/{postId}/comments/{id}', 'show');
+        Route::put('/{postId}/comments/{id}', 'update');
+        Route::delete('{postId}/comments/{id}', 'destroy');
+    });
+
 
 });
 

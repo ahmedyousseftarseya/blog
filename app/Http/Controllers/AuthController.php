@@ -14,7 +14,7 @@ class AuthController extends Controller
         $data = $request->validated();
         $user = User::where('email', $data['email'])->first();
 
-        if ($user && Hash::check($data['password'], $user->password) && $user->status == User::ACTIVE) {
+        if ($user && Hash::check($data['password'], $user->password)) {
             $token = auth('api')->login($user);
         }
         return $this->respondWithToken($token);
