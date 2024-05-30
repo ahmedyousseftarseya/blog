@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
 
-    // get all posts as json
     public function index()
     {
         $posts = Post::all();

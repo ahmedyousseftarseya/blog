@@ -18,6 +18,6 @@ class AuthApi
         if(auth('api')->user()) {
             return $next($request);
         }
-        return responseJson(false, trans('admin.unauthorized'), 401);
+        return responseJson(false, trans('lang.unauthorized'), 401);
     }
 }

@@ -15,7 +15,7 @@ abstract class GeneralRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(responseJson(404, $validator->errors()));
+        throw new HttpResponseException(responseJson(402, $validator->errors()));
     }
 
     /**

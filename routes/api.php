@@ -36,6 +36,7 @@ Route::prefix('v1')->group(function () {
 
 Route::prefix('v1')->middleware('auth_api')->group(function () {
 
+    // Route::apiResource('/', PostController::class);
     Route::controller(PostController::class)->prefix('posts')->group(function () {
         Route::get('/', 'index');
         Route::post('/', 'store');
