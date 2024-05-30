@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReplyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,7 +36,6 @@ Route::prefix('v1')->group(function () {
 
 Route::prefix('v1')->middleware('auth_api')->group(function () {
 
-    // Auth
     Route::controller(PostController::class)->prefix('posts')->group(function () {
         Route::get('/', 'index');
         Route::post('/', 'store');
@@ -44,8 +44,6 @@ Route::prefix('v1')->middleware('auth_api')->group(function () {
         Route::delete('/{post}', 'destroy');
     });
 
-
-     // Auth
      Route::controller(CommentController::class)->prefix('posts')->group(function () {
         Route::get('/{postId}/comments', 'index');
         Route::post('/{postId}/comments', 'store');
@@ -54,6 +52,14 @@ Route::prefix('v1')->middleware('auth_api')->group(function () {
         Route::delete('{postId}/comments/{id}', 'destroy');
     });
 
+
+     Route::controller(ReplyController::class)->prefix('comments')->group(function () {
+        Route::get('/{commentId}/replies', 'index');
+        Route::post('/{commentId}/replies', 'store');
+        Route::get('/{commentId}/replies/{id}', 'show');
+        Route::put('/{commentId}/replies/{id}', 'update');
+        Route::delete('{commentId}/replies/{id}', 'destroy');
+    });
 
 });
 

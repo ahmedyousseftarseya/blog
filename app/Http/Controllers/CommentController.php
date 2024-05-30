@@ -11,8 +11,6 @@ use App\Models\Post;
 
 class CommentController extends Controller
 {
-
-    // get all posts as json
     public function index($postId)
     {
         $post = Post::find($postId);
@@ -79,12 +77,11 @@ class CommentController extends Controller
         if(!$post) {
             return responseJson(404, __('lang.post_not_found'));
         }
-
         $comment = Comment::where('post_id', $postId)->find($id);
         if(!$comment) {
             return responseJson(404, __('lang.comment_not_found'));
         }
-        $post->delete();
+        $comment->delete();
         return responseJson(200, __('lang.comment_deleted'));
     }
 
